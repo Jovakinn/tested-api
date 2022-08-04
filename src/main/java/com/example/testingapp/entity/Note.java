@@ -13,6 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Note {
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 

@@ -27,7 +27,7 @@ public class Person {
     @Column(name = "email", unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Note> notes = new ArrayList<>();
 
