@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Person {
     @Id
-    @GeneratedValue
     private Long id;
 
     @Column(name = "first_name")

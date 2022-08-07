@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@ContextConfiguration(classes = {PersonRepository.class})
+@ContextConfiguration(classes = {PersonRepository.class, NoteRepository.class})
 @EnableAutoConfiguration
 @EntityScan(basePackages = {"com.example.testingapp.entity"})
 @DataJpaTest(properties = {"spring.main.allow-bean-definition-overriding=true"})
@@ -33,6 +33,7 @@ class PersonRepositoryTest {
     void testFindByEmail() {
         //given
         Person person = new Person();
+        person.setId(1L);
         person.setEmail("jane.doe@example.org");
         person.setFirstName("Jane");
         person.setLastName("Doe");
@@ -57,6 +58,7 @@ class PersonRepositoryTest {
     void testFindByFirstNameAndLastName() {
         //given
         Person person = new Person();
+        person.setId(1L);
         person.setEmail("jane.doe@example.org");
         person.setFirstName("Jane");
         person.setLastName("Doe");
