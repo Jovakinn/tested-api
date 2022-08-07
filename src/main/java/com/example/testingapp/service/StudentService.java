@@ -7,6 +7,7 @@ import com.example.testingapp.exceptions.StudentNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -14,10 +15,12 @@ import java.util.List;
 public class StudentService {
     private final StudentRepository studentRepository;
 
+    @Transactional
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
+    @Transactional
     public void addStudent(Student student) {
         Boolean existsEmail = studentRepository
                 .selectExistsEmail(student.getEmail());
@@ -29,6 +32,7 @@ public class StudentService {
         studentRepository.save(student);
     }
 
+    @Transactional
     public void deleteStudent(Long studentId) {
         if(!studentRepository.existsById(studentId)) {
             throw new StudentNotFoundException(

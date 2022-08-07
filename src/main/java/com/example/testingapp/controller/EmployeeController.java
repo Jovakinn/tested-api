@@ -19,9 +19,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.addEmployee(employee));
     }
 
     @GetMapping("/{email}")

@@ -5,6 +5,8 @@ import com.example.testingapp.entity.Employee;
 import com.example.testingapp.exceptions.EmployeeNotFound;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -12,15 +14,18 @@ import java.util.List;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+    @Transactional
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    public void addEmployee(Employee employee) {
-        employeeRepository.findByEmail(employee.getEmail())
+    @Transactional
+    public Employee addEmployee(Employee employee) {
+        return employeeRepository.findByEmail(employee.getEmail())
                 .orElseThrow(() -> new EmployeeNotFound("Employee not found"));
     }
 
+    @Transactional
     public Employee getEmployeeByEmail(String email) {
         return employeeRepository.findByEmail(email)
                 .orElseThrow(() -> new EmployeeNotFound("Employee not found"));
